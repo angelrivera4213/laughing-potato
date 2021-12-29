@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+        * { padding: 0; margin: 0; }
+        canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+    <canvas class='main-canvas' width='480' height='320'></canvas>
+
+    <script>
+        (function () {
+            function init () {
+                const canvas = document.querySelector('.main-canvas');
+                const ctx = canvas && canvas.getContext('2d');
+
+                let rightPressed = false;
+                let leftPressed = false;
+
+                function keyDownHandler (e) {
+                    const key = e.key;
+
+                    if (key === 'right' || key === 'ArrowRight') {
+                        rightPressed = true;
+                        return;
+                    }
+
+                    if (key === 'left' || key === 'ArrowLeft') {
+                        leftPressed = true;
+                        return;
+                    }
+                }
+
+                function keyUpHandler (e) {
+                    const key = e.key;
+
+                    if (key === 'right' || key === 'ArrowRight') {
+                        rightPressed = false;
+                        return;
+                    }
+
+                    if (key === 'left' || key === 'ArrowLeft') {
+                        leftPressed = false;
+                        return;
+                    }
+                }
+
+                document.addEventListener('keydown', keyDownHandler);
+                document.addEventListener('keyup', keyUpHandler);
+
+                const ballRadius = 10;
+                let ballX = canvas.width / 2 ;
+                let ballY = canvas.height - 30;
+                let ballDx = 2;
+                let ballDy = -2;
+
+                const paddleHeight = 10;
+                const paddleWidth = 75;
+
+                let paddleX = (canvas.width - paddleWidth) / 2;
+                const paddleDx = 7;
+
+
+                function drawBall (ctx, x, y) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+                    ctx.fillStyle = "#0095DD";
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                function calcBallPosition () {
+                    const newX = ballX + ballDx;
+                    const newY = ballY + ballDy;
+
+                    // Left or Right invert dx
+                    if (newX > (canvas.width - ballRadius) || newX < ballRadius) {
+                        ballDx = -ballDx;
+                    }
+
+                    // Top or Bottom invert dy
+                    if (newY > (canvas.height - ballRadius) || newY < ballRadius) {
+                        ballDy = -ballDy;
+                    }
+
+                    ballX = newX;
+                    ballY = newY;
+                }
+
+                function drawPaddle () {
+                    ctx.beginPath();
+                    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+                    ctx.fillStyle = "#0095DD";
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                function calcPaddlePosition () {
+                    if (rightPressed) {
+                        paddleX = paddleX + paddleDx;
+
+                        if (paddleX + paddleWidth > canvas.width) {
+                            paddleX = canvas.width - paddleWidth;
+                        }
+
+                        return;
+                    }
+
+                    if (leftPressed) {
+                        paddleX = paddleX - paddleDx;
+
+                        if (paddleX < 0) {
+                            paddleX = 0;
+                        }
+
+                        return;
+                    }
+                }
+
+
+                function draw () {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    drawBall(ctx, ballX, ballY);
+                    drawPaddle()
+                    calcPaddlePosition();
+                    calcBallPosition();
+                }
+
+                if (ctx) {
+                    setInterval(draw, 10);
+                }
+            }
+
+            window.addEventListener('load', (event) => {
+                init();
+            });
+        })();
+
+    </script>
+</body>
+</html>
