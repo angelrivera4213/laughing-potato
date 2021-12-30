@@ -16,6 +16,7 @@
             function init () {
                 const canvas = document.querySelector('.main-canvas');
                 const ctx = canvas && canvas.getContext('2d');
+                let interval;
 
                 let rightPressed = false;
                 let leftPressed = false;
@@ -82,8 +83,16 @@
                     }
 
                     // Top or Bottom invert dy
-                    if (newY > (canvas.height - ballRadius) || newY < ballRadius) {
+                    if (newY < ballRadius) {
                         ballDy = -ballDy;
+                    } else if (newY > (canvas.height - ballRadius)) {
+                        if ((newX + ballRadius / 2) > paddleX && (newX - ballRadius / 2) < paddleX + paddleWidth) {
+                            ballDy = -ballDy;
+                        } else {
+                            alert('GAME OVER');
+                            document.location.reload();
+                            clearInterval(interval);
+                        }
                     }
 
                     ballX = newX;
@@ -130,7 +139,7 @@
                 }
 
                 if (ctx) {
-                    setInterval(draw, 10);
+                    interval = setInterval(draw, 10);
                 }
             }
 
