@@ -39,6 +39,13 @@
                 }
 
                 let score = 0;
+                let lives = 3;
+
+                function drawLives () {
+                    ctx.font = '16px Arial';
+                    ctx.fillStyle = '#0095DD';
+                    ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
+                }
 
                 function drawScore () {
                     ctx.font = '16px Arial';
@@ -60,7 +67,6 @@
                                     if (score === brickRowCount * brickColumnCount) {
                                         alert('YOU WIN, CONGRATULATIONS!');
                                         document.location.reload();
-                                        clearInterval(interval);
                                     }
                                 }
                             }
@@ -86,6 +92,8 @@
                         }
                     }
                 }
+
+
 
                 function keyDownHandler (e) {
                     const key = e.key;
@@ -115,14 +123,23 @@
                     }
                 }
 
+                function mouseMoveHandler (e) {
+                    const relativeX = e.clientX - canvas.offsetLeft;
+
+                    if (relativeX > 0 && relativeX < canvas.width) {
+                        paddleX = relativeX - paddleWidth / 2;
+                    }
+                }
+
+                document.addEventListener('mousemove', mouseMoveHandler);
                 document.addEventListener('keydown', keyDownHandler);
                 document.addEventListener('keyup', keyUpHandler);
 
                 const ballRadius = 10;
                 let ballX = canvas.width / 2 ;
                 let ballY = canvas.height - 30;
-                let ballDx = 2;
-                let ballDy = -2;
+                let ballDx = 4;
+                let ballDy = -4;
 
                 const paddleHeight = 10;
                 const paddleWidth = 75;
@@ -155,9 +172,18 @@
                         if ((newX + ballRadius / 2) > paddleX && (newX - ballRadius / 2) < paddleX + paddleWidth) {
                             ballDy = -ballDy;
                         } else {
-                            alert('GAME OVER');
-                            document.location.reload();
-                            clearInterval(interval);
+                            lives--;
+
+                            if (!lives) {
+                                alert('GAME OVER');
+                                document.location.reload();
+                            } else {
+                                ballX = canvas.width /2;
+                                ballY = canvas.height - 30;
+                                ballDx = 4;
+                                ballDy = -4;
+                                paddleX = (canvas.width - paddleWidth)/2;
+                            }
                         }
                     }
 
@@ -203,12 +229,16 @@
                     drawPaddle();
                     collisionDetection();
                     drawScore();
+                    drawLives();
                     calcPaddlePosition();
                     calcBallPosition();
+
+                    // request another frame
+                    requestAnimationFrame(draw);
                 }
 
                 if (ctx) {
-                    interval = setInterval(draw, 10);
+                    draw();
                 }
             }
 
