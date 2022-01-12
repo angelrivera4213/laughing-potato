@@ -1,0 +1,30 @@
+.game-container {
+  max-width: 300px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.game-container .game-details {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.tic-tac-toe .column {
+  min-height: 100px;
+  min-width: 100px;
+  border: black 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tic-tac-toe .row {
+  display: flex;
+  height: 100px;
+}
+
+.tic-tac-toe .cell-text {
+  font-size: 85px;
+}
