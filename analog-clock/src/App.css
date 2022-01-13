@@ -1,0 +1,85 @@
+.App {
+  display: flex;
+  background-color: #f6f8fa;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.analog-clock {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hour-hand {
+  height: 6px;
+  width: 100px;
+  background-color: #B2BEB5;
+  transform-origin: 0px 3px;
+  border-radius: 8px;
+  transform: translateX(50%) rotate(-90deg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  transition: transform 1s;
+  z-index: 1;
+
+}
+
+.tick {
+  width: 8px;
+  height: 4px;
+  border-radius: 8px;
+  background-color: white;
+  margin-right: 2px;
+}
+
+.minute-hand {
+  height: 6px;
+  width: 135px;
+  background-color: #6699cc;
+  transform-origin: 0px 3px;
+  border-radius: 8px;
+  transform: translateX(50%) rotate(-90deg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  transition: transform 1s;
+  z-index: 2;
+}
+
+.tick {
+  width: 8px;
+  height: 4px;
+  border-radius: 8px;
+  background-color: white;
+  margin-right: 2px;
+}
+
+.seconds-hand {
+  height: 2px;
+  width: 135px;
+  background-color: #B21919;
+  transform-origin: 0px 1.5px;
+  border-radius: 2px;
+  transform: translateX(50%) translateY(0.75px) rotate(-90deg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  transition: transform 0.2s;
+  z-index: 3;
+}
+
+.clock-number {
+  position: absolute;
+}
