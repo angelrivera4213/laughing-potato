@@ -1,0 +1,26 @@
+{
+  "name": "lru-cache",
+  "version": "1.0.0",
+  "description": "A simple LRU cache in TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "laughing-potato"
+  },
+  "keywords": [
+    "least",
+    "recenty",
+    "used",
+    "cache",
+    "javascript",
+    "typescript"
+  ],
+  "author": "Angel A. Rivera",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.5.4"
+  }
+}
