@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style type="text/css">
+            .circle {
+                width: 50px;
+                height: 50px;
+                background-color: green;
+                border-radius: 50%;
+                left: 0;
+            }
+        </style>
+        <script type="text/javascript">
+            (function () {
+                const animate = (element, duration, distance) => {
+                    element.style.setProperty('position', 'relative');
+                    element.style.setProperty('transition', `left ${duration/1000}s linear`);
+                    setTimeout(() => element.style.setProperty('left', distance));
+                };
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    animate(document.querySelector('.circle'), 1000, '300px');
+                });
+            })()
+        </script>
+    </head>
+    <body>
+        <div class='app'>
+            <div class='circle'/>
+        </div>
+    </body>
+</html>

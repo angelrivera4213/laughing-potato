@@ -13,6 +13,10 @@ class EventEmitter {
         const listeners = this._listeners[type] || new Set();
 
         listeners.add(listener);
+
+        if (!this._listeners[type]) {
+            this._listeners[type] = listeners;
+        }
     }
 
     removeEventListener (type, listener) {
