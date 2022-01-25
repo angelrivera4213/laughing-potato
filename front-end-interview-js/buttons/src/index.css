@@ -1,0 +1,45 @@
+.world {
+    width: 1000px;
+    height: 1000px;
+}
+
+.top-paddle-container,
+.bottom-paddle-container {
+    height: 100px;
+    width: 100%;
+}
+
+.top-button,
+.bottom-button {
+    height: 100%;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: gray;
+}
+
+.left-right-ball-paddles-container {
+    display: flex;
+    width: 100%;
+}
+
+.left-button,
+.right-button {
+    width: 100px;
+    height: 800px;
+    background-color: gray;
+}
+
+.ball-container {
+    flex-grow: 1;
+    position: relative;
+}
+
+.ball {
+    height: 100px;
+    width: 100px;
+    background-color: pink;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
