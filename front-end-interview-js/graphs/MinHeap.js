@@ -157,3 +157,12 @@ class Heap {
         return oldRoot;
     }
 }
+
+
+var minHeap = new Heap();
+minHeap.insert({name: 'angel'}, -Infinity);
+minHeap.insert({name: 'Ambar'}, 100);
+minHeap.insert({name: 'Erica'}, 5);
+minHeap.insert({name: 'Dad'}, -20);
+minHeap.insert({name: 'Mom'}, 10);
+minHeap.insert({name: 'Lupe'}, 15);
