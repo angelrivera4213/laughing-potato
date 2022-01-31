@@ -5,7 +5,7 @@
 Get tested in the united states 72 hours before flight to iceland. They accept PCR and rapid antigen test. 
 
 ## Step 2
-Fill out locator form for iceland https://www.icelandair.com/support/covid-19/faq/#are-you-ready-to-fly----review-our-checklist 
+Fill out locator form for iceland https://www.icelandair.com/support/covid-19/faq/#are-you-ready-to-fly----regview-our-checklist 
 
 ## Things to take
 

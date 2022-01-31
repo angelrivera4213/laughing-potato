@@ -19,8 +19,8 @@ class Node {
     }
 }
 
-const UNDIRECTED = Symbol('UNDIRECTED'); // two-ways edges
-const DIRECTED = Symbol('DIRECTED'); // one-way edges
+var UNDIRECTED = Symbol('UNDIRECTED'); // two-ways edges
+var DIRECTED = Symbol('DIRECTED'); // one-way edges
 
 class Graph {
     constructor(graphType = UNDIRECTED) {
@@ -152,31 +152,72 @@ let ShortestPathMixin = (superclass) => class extends superclass {
             return;
         }
 
-        this._getShortestPath(root, this._graph);
+        return this._getShortestPath(root, this._graph);
     }
 
     _getShortestPath (root, graph) {
-        const sptSet = new Set();
+        const spt = new Map();
         const distances = new Map();
 
-
-        for (const v of graph.keys()) {
+        for (const v of graph.values()) {
+            console.log('_getShortestPath.root', root);
+            console.log('_getShortestPath.v', v);
             let distance = Infinity;
 
-            if (root.value === v) {
+            if (root === v) {
                 distance = 0;
             }
 
             distances.set(v, distance);
         }
 
-        while(sptSet.size !== graph.size) {
-
+        while(spt.size !== graph.size) {
+            console.log('distances', distances);
+            const u = this._getMinDistance(distances);
+            console.log('u', u)
+            spt.set(u, distances.get(u));
+            this._updateAdjVerticesDistance(u, distances);
+            distances.delete(u);
         }
+
+        return spt;
+    }
+
+    _updateAdjVerticesDistance (u, distances) {
+        const uDistance = distances.get(u);
+        const adjNodes = u.adjNodes;
+
+        for (const [v, d] of adjNodes.entries()) {
+            const vDistance = distances.get(v);
+            const newDistance = uDistance + d;
+
+            console.log('vDistance', vDistance);
+            console.log('newDistance', newDistance);
+
+            if (newDistance < vDistance) {
+                distances.set(v, newDistance);
+            }
+        }
+    }
+
+    _getMinDistance (distances) {
+        console.log('_getMinDistance.distances', distances);
+        let minDistance = Infinity;
+        let u = null;
+        for (const [v, d] of distances.entries()) {
+            console.log('v', v);
+            console.log('d', d);
+            if (d < minDistance) {
+                minDistance = d;
+                u = v;
+            }
+        }
+
+        return u;
     }
 }
 
-class BFSGraph extends mix(Graph).with(BFSMixin, DFSMixin) {
+class BFSGraph extends mix(Graph).with(BFSMixin, DFSMixin, ShortestPathMixin) {
     bfs (value) {
         const root = this.getNode(value);
         this.doBFS(root);
@@ -186,17 +227,21 @@ class BFSGraph extends mix(Graph).with(BFSMixin, DFSMixin) {
         const root = this.getNode(value);
         this.doDFS(root);
     }
+
+    shortestPath (value) {
+        const root = this.getNode(value);
+        return this.getShortestPath(root);
+    }
 }
 
 
-const myBFSGraph = new BFSGraph();
+var myBFSGraph = new BFSGraph();
 
 myBFSGraph.addManyEdges(0, [[1, 1], [2, 3]]);
 myBFSGraph.addManyEdges(1, [[3, 5], [4, 1]]);
 myBFSGraph.addManyEdges(2, [[5, 7], [6, 2]]);
 myBFSGraph.addManyEdges(5, [[7, 10]]);
-
-
+myBFSGraph.addManyEdges(4, [[7, 5]]);
 
 
 
