@@ -1,0 +1,17 @@
+[
+    {
+        "dimensions": [
+            {
+                "environment": {
+                    "development": {
+                        "dev": null
+                    },
+                    "production": {
+                        "stage": null,
+                        "prod": null
+                    }
+                }
+            }
+        ]
+    }
+]

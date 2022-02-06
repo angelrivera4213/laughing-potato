@@ -1,6 +1,6 @@
 import buildUrl from '../../lib/url';
 
-export default function async rest(url, method, headers, body, resourceConfig) {
+export default async function rest(url, method, headers = {}, body, resourceConfig = {}) {
 	const resource = buildUrl(url);
 
 	const { credentials, format } = resourceConfig;
@@ -18,7 +18,7 @@ export default function async rest(url, method, headers, body, resourceConfig) {
 	const response = await fetch(resource, settings);
 
 	const { status, statusText } = (response || {});
-	const success = status > 200 && status < 300;
+	const success = status >= 200 && status < 300;
 	
 	if (!success) {
 		const error = new Error(statusText);
