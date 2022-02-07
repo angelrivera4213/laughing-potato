@@ -6,6 +6,7 @@ import StarwarsService from '../services/StarwarsService';
 
 // components
 import Head from 'next/head';
+import Characters from '../components/Characters';
 
 export default function Home({ characters = [] }) {
     return (
@@ -14,7 +15,7 @@ export default function Home({ characters = [] }) {
                 <title>Star Wars Characters | StarWars.com</title>
             </Head>
             <div className='mx-auto max-w-screen-xl min-h-screen bg-slate-300'>
-                <pre>{JSON.stringify(characters, null, 4) }</pre>
+                <Characters characters={characters}/>
             </div>
         </>
     )
