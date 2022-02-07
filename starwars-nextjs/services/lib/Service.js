@@ -31,11 +31,8 @@ export class Service {
 		if (!Array.isArray(configPath)) {
 			configPath = [configPath];
 		}
-
-		console.log('configPath', configPath);
 		
 		await Promise.all(configPath.map(async (config) => {
-			console.log('config', config);
 			if (!config || !fs.existsSync(config)) {
 				throw new Error(`A valid configPath is required to leverage YCB in service ${name}`);
 			}

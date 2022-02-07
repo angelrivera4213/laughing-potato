@@ -14,7 +14,7 @@ export default function Home({ characters = [] }) {
             <Head>
                 <title>Star Wars Characters | StarWars.com</title>
             </Head>
-            <div className='mx-auto max-w-screen-xl min-h-screen bg-slate-300'>
+            <div className='mx-auto max-w-screen-xl min-h-screen bg-stone-900'>
                 <Characters characters={characters}/>
             </div>
         </>
@@ -22,8 +22,6 @@ export default function Home({ characters = [] }) {
 }
 
 export async function getServerSideProps (context) {
-    console.log('context', context);
-    console.log('StarwarsService', StarwarsService);
     const [ characters ] = await Promise.all([
         StarwarsService.read(context.req, 'starwars.characters', {})
     ]);

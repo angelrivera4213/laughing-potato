@@ -6,7 +6,7 @@ export default function Characters ({
 	characters = []
 }) {
 	return (
-		<div className={cx('', className)}>
+		<div className={cx('md:flex md:flex-wrap justify-center', className)}>
 			{
 				characters.map(character => (
 					<CharacterCard character={character} />
